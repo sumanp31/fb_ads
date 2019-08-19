@@ -38,7 +38,11 @@ For adLP, any entry that isn’t an url is replaced by none. And I cleaned it do
 ![ ](https://github.com/sumanp31/fb_ads/blob/master/plots/adLP2.png  "Stat for the ads with political agenda")
 
 Fill null values of adClick by 0 and null value of adImpress by the corresponding adClick. This is because, ad Impression is the number of times an ad was called from it’s cource, irrespective of whether it was clicked by the user. So it has to be at greater than equal to the number of times it was clicked.
+![ ](https://github.com/sumanp31/fb_ads/blob/master/plots/adClick1.png  "adClick for all the ads")
+![ ](https://github.com/sumanp31/fb_ads/blob/master/plots/adClick2.png  "adClick for the ads with political agenda")
 
+![ ](https://github.com/sumanp31/fb_ads/blob/master/plots/adImpress1.png  "adImpress for all the ads")
+![ ](https://github.com/sumanp31/fb_ads/blob/master/plots/adImpress2.png  "adImpress for the ads with political agenda")
 
 I separated out the dates and times from the adCreation. Converted the date to number of days before the date of election “11/08/16”. I also converted any non-datetime value to “01/01/11” that is, a day before the previous election and any ad before that shouldn’t effect the 2016 election. Converted time to 24 hr format and just considered the hour and droped the minute and second.
 
