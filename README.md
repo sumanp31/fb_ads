@@ -32,3 +32,16 @@ It can be seen that adLocation and adState are extremely sparse columns and henc
 
 I filled null values in adText with “No Text”. Later, after a quick view of read through the uniques values in adText, I came up with a set of words that suggests that the ad was about the 2016 presidental election. The set of words is as follow: [‘Trump' , 'wall' , 'war' , 'politics' , 'racism' , 'Clinton' , 'liberty', 'rally' , 'election' , 'president' , 'ISIS' ,'Syria' , 'terror']. If these words are present in the adText then it is denoted as 1 or as 0. This is later used as the dependent variable. The idea behind this decision is that we are trying to figure out why which of the ads are capable of manipulating the election result.
 
+
+For adLP, any entry that isn’t an url is replaced by none. And I cleaned it down to the website name intead of the page details.
+![ ](https://github.com/sumanp31/fb_ads/blob/master/plots/adLP1.png  "Stat for all the ads")
+![ ](https://github.com/sumanp31/fb_ads/blob/master/plots/adLP2.png  "Stat for the ads with political agenda")
+
+Fill null values of adClick by 0 and null value of adImpress by the corresponding adClick. This is because, ad Impression is the number of times an ad was called from it’s cource, irrespective of whether it was clicked by the user. So it has to be at greater than equal to the number of times it was clicked.
+
+
+I separated out the dates and times from the adCreation. Converted the date to number of days before the date of election “11/08/16”. I also converted any non-datetime value to “01/01/11” that is, a day before the previous election and any ad before that shouldn’t effect the 2016 election. Converted time to 24 hr format and just considered the hour and droped the minute and second.
+
+This cleaned dataframe is saved as “cleaned_all_fb_ads.csv”
+Given that the number of training example is small, I divided the dataset into training and cross-validation set at a ratio of 80%-20%. Numerical data are normalised using sklearn.MinMaxScaler() and categorical data are encoded using one-hot-encoding pandas.get_dummies(). When fit to
+Logistic Regression, I got the following evaluation matrics:
