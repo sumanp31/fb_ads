@@ -15,13 +15,13 @@ sns.set()
 
 
 
-train = pd.read_excel("all_fb_ads (1).xlsx") 
+train = pd.read_excel("all_fb_ads.xlsx") 
 
-# print (train.info())
+print (train.info())
 
-# print (train.apply(lambda x: sum(x.isnull())))
-# print (train.describe())
-# print (train.apply(lambda x: len(x.unique())))
+print (train.apply(lambda x: sum(x.isnull())))
+print (train.describe())
+print (train.apply(lambda x: len(x.unique())))
 
 ## Removing Nan and handling missing values
 
@@ -46,16 +46,20 @@ for ind in adCreat.index:
 	
 
 	if (len(a[ind])>=len(a[1])-1) and ((a[ind][-8])!=":"):
-		 alist = list(a[ind])
-		 alist.insert(13, ':')
-		 a[ind] = "".join(alist)
+		alist = list(a[ind])
+		alist.insert(13, ':')
+		a[ind] = "".join(alist)
 
 ## Spliting adCreation into adDate and Time
 
 
 train['adDate'] = ([a[i][0:8] for i in a.index])
-train['adDate'] =  pd.to_datetime(train['adDate'], format='%m/%d/%y')
-
+for i in train.index:
+	try:
+		train['adDate'][i] =  pd.to_datetime(train['adDate'][i], format='%m/%d/%y')
+	except ValueError:
+		train['adDate'][i] =  pd.to_datetime("01/01/17", format='%m/%d/%y')
+		print (train['adDate'][i])
 train['Time'] = ([a[i][8:] for i in a.index])
 temp = train['Time'].copy()
 
